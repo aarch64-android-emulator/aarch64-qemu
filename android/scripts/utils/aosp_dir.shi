@@ -96,8 +96,10 @@ aosp_clang_libcplusplus () {
 aosp_prebuilt_clang_dir_for () {
     case $1 in
         linux*)
-            local CLANG_VERSION="$(aosp_clang_version)"
-            printf "prebuilts/clang/host/linux-x86/$CLANG_VERSION/bin"
+            printf "prebuilts/gcc/linux-aarch64/host/gcc-arm-none-eabi"
+            ;;
+        linux*)
+            printf "prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.11-4.8"
             ;;
         darwin*)
             local CLANG_VERSION="$(aosp_clang_version)"
@@ -116,6 +118,9 @@ aosp_prebuilt_clang_dir_for () {
 # $1: System name (e.g. 'linux' or 'linux-x86_64')
 aosp_prebuilt_toolchain_subdir_for () {
     case $1 in
+        linux-aarch64)
+            printf "prebuilts/gcc/linux-aarch64/host/gcc-arm-none-eabi"
+            ;;
         linux*)
             local GLIBC="$(aosp_linux_glibc_version)"
             printf "prebuilts/gcc/linux-x86/host/x86_64-linux-$GLIBC"
@@ -141,6 +146,9 @@ aosp_prebuilt_breakpad_subdir_for () {
 # $1: System name (e.g. 'linux-x86' or 'linux-x86_64')
 aosp_prebuilt_toolchain_sysroot_subdir_for () {
     case $1 in
+        linux-aarch64)
+            printf "${PREBUILT_DIR}/arm-none-eabi"
+            ;;
         linux*)
             local GLIBC="$(aosp_linux_glibc_version)"
             printf "prebuilts/gcc/linux-x86/host/x86_64-linux-$GLIBC/x86_64-linux"
@@ -157,6 +165,9 @@ aosp_prebuilt_toolchain_sysroot_subdir_for () {
 
 aosp_prebuilt_toolchain_prefix_for () {
     case $1 in
+        linux-aarch64)
+            printf "arm-none-eabi-"
+            ;;
         linux*)
             printf "x86_64-linux-"
             ;;

@@ -19,7 +19,7 @@ shell_import utils/option_parser.shi
 shell_import utils/package_list_parser.shi
 
 # List of valid host systems.
-_SHU_VALID_HOST_SYSTEMS="linux-x86,linux-x86_64,windows-x86,windows-x86_64,darwin-x86,darwin-x86_64"
+_SHU_VALID_HOST_SYSTEMS="linux-x86,linux-x86_64,windows-x86,windows-x86_64,darwin-x86,darwin-x86_64,linux-aarch64"
 
 # Call this function before 'option_parse' to register options related to
 # building packages. This registers the following options:
@@ -75,7 +75,7 @@ package_builder_register_options () {
 }
 
 _shu_builder_cleanup_temp_dir () {
-    rm -rf "$TEMP_DIR"
+    # rm -rf "$TEMP_DIR"
     exit $1
 }
 
@@ -498,6 +498,8 @@ _shu_builder_prepare_for_host () {
         *)
             ;;
     esac
+
+    echo $_SHU_BUILDER_CURRENT_HOST > /root/log
 
     case $_SHU_BUILDER_CURRENT_HOST in
         linux-x86_64)

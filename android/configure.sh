@@ -44,6 +44,8 @@ case "$BUILD_ARCH" in
     ;;
     x86_64|amd64) BUILD_ARCH=x86_64
     ;;
+    aarch64) BUILD_ARCH=aarch64
+    ;;
     *) panic "$BUILD_ARCH builds are not supported!"
     ;;
 esac
@@ -277,7 +279,8 @@ OPTION_CXX=
 VERBOSITY=0
 OPTION_SNAPSHOT_PROFILE=0
 
-AOSP_ROOT_DIR=$(dirname "$0")/../../../
+#AOSP_ROOT_DIR=$(dirname "$0")/../../../
+AOSP_ROOT_DIR=/root/aosp
 if [ -d "$AOSP_ROOT_DIR" ]; then
     AOSP_ROOT_DIR=$(cd "$AOSP_ROOT_DIR" && pwd -P 2>/dev/null)
 else
@@ -653,6 +656,7 @@ fi
 probe_prebuilts_dir () {
     local PREBUILTS_DIR
     PREBUILTS_DIR=$AOSP_PREBUILTS_DIR/android-emulator-build/$3
+    mkdir -p "$PREBUILTS_DIR"
     if [ ! -d "$PREBUILTS_DIR" ]; then
         panic "Missing prebuilts directory: $PREBUILTS_DIR"
     fi

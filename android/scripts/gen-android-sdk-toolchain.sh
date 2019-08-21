@@ -109,7 +109,7 @@ aosp_dir_parse_option
 # Handle --host option.
 if [ "$OPT_HOST" ]; then
     case $OPT_HOST in
-        linux-x86_64|darwin-x86_64|windows-x86|windows-x86_64|windows_msvc-x86_64)
+        linux-aarch64|linux-x86_64|darwin-x86_64|windows-x86|windows-x86_64|windows_msvc-x86_64)
             ;;
         *)
             panic "Invalid --host value: $OPT_HOST"
@@ -379,10 +379,10 @@ prepare_build_for_darwin() {
 }
 
 prepare_build_for_linux() {
-    GCC_DIR="${PREBUILT_TOOLCHAIN_DIR}/lib/gcc/x86_64-linux/4.8/"
+    GCC_DIR="${PREBUILT_TOOLCHAIN_DIR}/lib/gcc/aarch64-linux/4.8/"
     CLANG_BINDIR=$AOSP_DIR/$(aosp_prebuilt_clang_dir_for linux)
     CLANG_DIR=$(realpath $CLANG_BINDIR/..)
-    GNU_CONFIG_HOST=x86_64-linux
+    GNU_CONFIG_HOST=$(uname -m)-linux
     CLANG_VERSION=$(${CLANG_BINDIR}/clang -v 2>&1 | head -n 1 | awk '{print $4}')
     SYSROOT="${PREBUILT_TOOLCHAIN_DIR}/sysroot"
 

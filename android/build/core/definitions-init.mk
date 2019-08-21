@@ -246,6 +246,9 @@ ifndef BUILD_HOST_ARCH
         ifneq (,$(findstring Power,$(UNAME)))
             BUILD_HOST_ARCH := ppc
         endif
+        ifneq (,$(findstring aarch64,$(UNAME)))
+            BUILD_HOST_ARCH := aarch64
+        endif
         ifeq ($(BUILD_HOST_ARCH),)
             $(call -build-info,Unsupported host architecture: $(UNAME))
             $(call -build-error,Aborting)

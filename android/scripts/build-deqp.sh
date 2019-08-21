@@ -51,6 +51,11 @@ CLANG_REV=4679922
 
 for SYSTEM in $LOCAL_HOST_SYSTEMS; do
     case $SYSTEM in
+        linux-aarch64)
+            log "LINUX"
+            export CC=$AOSP_DIR/prebuilts/clang/host/linux-aarch64/clang-$CLANG_REV/bin/clang
+            export CXX=$AOSP_DIR/prebuilts/clang/host/linux-aarch64/clang-$CLANG_REV/bin/clang++
+            ;;
         linux*)
             log "LINUX"
             export CC=$AOSP_DIR/prebuilts/clang/host/linux-x86/clang-$CLANG_REV/bin/clang
